@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{datetime}
+\newdateformat{mydate}{\twodigit{\THEMONTH}/\twodigit{\THEDAY}/\THEYEAR}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{Brent Myers \\ Econ 5253 \\ \mydate\today}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+~
+\vspace{2em}
+\begin{center}
+\textbf{\Large \underline{Problem Set 5}}
+\end{center}
+
+\vspace{1em}
+
+\section{Web Scraping Without an API}
+
+For this exercise, I scraped the List of S\&P 500 Companies from Wikipedia using the \texttt{rvest} and \texttt{tidyverse} packages in R. I used the CSS selector \texttt{table.wikitable} to extract the main table from the page. The resulting data frame contains 503 rows and 8 columns, including ticker symbol, company name, GICS sector, sub-industry, headquarters location, date added to the index, CIK number, and founding year.
+
+As someone interested in accounting, this data may be useful because it provides a comprehensive list of S\&P 500 companies along with their sector classifications and CIK numbers, which could be used to link to SEC filings for further financial analysis. I referenced the \texttt{rvest} package documentation to help with parsing the HTML. I used Claude to assist me in writing and understanding the R script. 
+
+\section{API Data Pull}
+
+For the API portion, I used two approaches: 
+
+First, I used the \texttt{tidyquant} package to pull daily stock price data for Apple (AAPL) from January 2020 through January 2025. This returned 1,258 rows of daily trading data including open, high, low, close, volume, and adjusted price. No API key was required for this pull.
+
+Second, I used the \texttt{fredr} package to pull monthly Consumer Price Index (CPI) data from the Federal Reserve Economic Data (FRED) API, starting from January 2000. This required my API key from FRED which I have stored in my .Renviron file in R Studio. The data contains 313 monthly observations. It was fun to see how quickly I could pull this much data into R and visualize it - I created line charts using \texttt{ggplot2} to visualize the Apple stock price and CPI trends over time. Both datasets could be useful for future research combining firm-level financial data with macroeconomic indicators. 
+
+\end{document}
