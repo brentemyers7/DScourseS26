@@ -1,0 +1,65 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{datetime}
+\usepackage{amsmath}
+\usepackage{tabularray}
+\usepackage{siunitx}
+\usepackage[parfill]{parskip}
+\usepackage{float}
+
+% Header setup: right-aligned, no rule
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Brent Myers \\ Econ 5253 \\ 03/31/2026}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{45pt}
+\setlength{\headsep}{20pt}
+
+\begin{document}
+
+% Title: centered, bold, underlined
+\begin{center}
+\textbf{\underline{Problem Set 7 --- Imputing Missing Data \& Automated Reporting}}
+\end{center}
+
+\vspace{1em}
+
+\section*{1. Summary Statistics}
+
+After loading the wages dataset and dropping observations with missing values for \texttt{hgc} or \texttt{tenure}, the sample consists of 2,229 women working in the US in 1988. Table 1 presents summary statistics for all variables. Notably, the \texttt{logwage} variable is missing at a rate of approximately 25.1\%.
+
+\vspace{1em}
+\noindent
+\input{summary_table.tex}
+\vspace{1em}
+
+\section*{2. Missingness Mechanism}
+
+Logwage is missing for women who were not currently working or reporting wages in 1988. Intuitively, this likely correlates with observed characteristics such as education and marital status (suggesting MAR), and potentially with the unobserved wage itself (MNAR). This suggests the missingness mechanism is either MAR or MNAR. To investigate further, I conducted two formal tests.
+
+First, Little's MCAR test yielded a p-value near zero, allowing us to reject the null hypothesis that logwage is Missing Completely at Random (MCAR). Second, I estimated a logistic regression of a missingness indicator on the observed covariates. The results show that \texttt{hgc} and \texttt{tenure} are both highly significant predictors of whether logwage is missing ($p < 2 \times 10^{-16}$ for both), while the other covariates are not statistically significant at the 5\% level. This evidence supports the conclusion that logwage is most likely Missing at Random (MAR) --- that is, the probability of missingness depends on observed characteristics such as education and job tenure, rather than on the unobserved wage itself.
+
+\section*{3. Regression Results}
+
+I estimated the following regression model under four different imputation methods for missing logwage observations:
+
+\begin{equation}
+\text{logwage}_i = \beta_0 + \beta_1 \text{hgc}_i + \beta_2 \text{college}_i + \beta_3 \text{tenure}_i + \beta_4 \text{tenure}_i^2 + \beta_5 \text{age}_i + \beta_6 \text{married}_i + \varepsilon_i
+\end{equation}
+
+The coefficient of interest is $\beta_1$, which captures the returns to schooling. The true value is $\hat{\beta}_1 = 0.093$. Table 2 presents the results.
+
+\vspace{1em}
+\input{regression_table.tex}
+\vspace{1em}
+
+All four methods underestimate the true returns to schooling. The listwise deletion model produces $\hat{\beta}_1 = 0.062$, which assumes MCAR --- an assumption we have already rejected. Mean imputation performs worst at $\hat{\beta}_1 = 0.050$, because replacing missing wages with the overall mean reduces variance in the dependent variable and attenuates coefficient estimates toward zero. The predicted value imputation yields coefficients identical to listwise deletion ($\hat{\beta}_1 = 0.062$) but with artificially smaller standard errors, since imputed values fall exactly on the regression line and inflate $R^2$ without adding real information. Finally, the MICE multiple imputation model produces $\hat{\beta}_1 = 0.060$, which accounts for imputation uncertainty by pooling estimates across five imputed datasets. While MICE is the most principled approach of the four, all methods underestimate the true value, suggesting that the missingness mechanism may have components of MNAR that none of these methods fully address.
+
+\section*{4. Project Progress}
+
+For my final project, I am studying corporate income shifting behavior among US multinational firms. The data come from Wharton Research Data Services (WRDS), primarily using Compustat Fundamentals Annual (\texttt{comp.funda}) for firm-level financials such as assets, domestic and foreign pre-tax income, sales, debt, R\&D, and taxes, along with Compustat Geographic Segments (\texttt{compseg.wrds\_segmerged}) for segment-level sales and assets classified as domestic or foreign. The sample covers fiscal years 2010--2024, excluding 2017 due to the Tax Cuts and Jobs Act (TCJA) transition.
+
+The modeling approach uses OLS regression with robust standard errors. The dependent variable is an income shifting measure defined as the difference between foreign and domestic profit margins. The key predictor is the tax rate differential between a firm's foreign effective tax rate and the US statutory rate. Controls include firm size, leverage, R\&D intensity, advertising, and PP\&E, along with a year trend and a post-TCJA indicator. I plan to estimate progressively richer specifications: a basic OLS model, a model with year fixed effects, and a model with TCJA interaction terms to test whether income shifting behavior changed after the 2017 tax reform.
+
+\end{document}
