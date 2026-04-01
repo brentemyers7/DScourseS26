@@ -21,8 +21,7 @@
 \begin{document}
 
 \begin{center}
-\textbf{\uline{Problem Set 8}}\\[0.5em]
-\textit{Matrix Manipulation, Optimization, and Simulated Data}
+\textbf{\uline{Problem Set 8 - Matrix Manipulation, Optimization, and Simulated Data}}\\[0.5em]
 \end{center}
 
 \section*{Q4: Data Simulation}
@@ -45,8 +44,12 @@ Both the L-BFGS (gradient-based) and Nelder-Mead (derivative-free) algorithms pr
 The MLE estimates of $\beta$ are identical to the OLS estimates, which is expected since OLS and MLE produce the same coefficient estimates under the assumption of normally distributed errors. The MLE estimate of $\sigma$ is 0.4999, which is very close to the true value of 0.5.
 
 \section*{Q9: OLS via \texttt{lm()}}
-Using R's built-in \texttt{lm()} function confirms all previous results. The regression table is shown below. All estimates of $\hat{\beta}$ are within a few thousandths of the ground truth $\beta$ used to generate the data, which is what we would expect given the large sample size ($N = 100{,}000$) and relatively small error variance ($\sigma^2 = 0.25$).
+Using R's built-in \texttt{lm()} function confirms all previous results. The regression table is shown below, followed by a comparison table of $\hat{\beta}$ estimates across all six methods.
 
 \input{PS8_regression.tex}
+
+All estimates of $\hat{\beta}$ are within a few thousandths of the ground truth $\beta$ used to generate the data, which is what we would expect given the large sample size ($N = 100{,}000$) and relatively small error variance ($\sigma^2 = 0.25$). As the comparison table below shows, all six estimation methods --- closed-form OLS, gradient descent, L-BFGS, Nelder-Mead, MLE, and \texttt{lm()} --- produce identical estimates to seven decimal places.
+
+\input{PS8_comparison.tex}
 
 \end{document}

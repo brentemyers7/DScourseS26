@@ -145,9 +145,10 @@ mle_gradient <- function(theta, Y, X) {
   return(grad)
 }
 
-# Use OLS estimates as starting values for better convergence
-start_beta <- as.vector(beta_hat_OLS)
-start_sig  <- sqrt(sum((Y - X %*% beta_hat_OLS)^2) / N)
+# Use moderately perturbed OLS estimates as starting values
+set.seed(42)
+start_beta <- as.vector(beta_hat_OLS) + rnorm(K, mean = 0, sd = 0.5)
+start_sig  <- abs(rnorm(1, mean = 0.5, sd = 0.5))
 
 # Run L-BFGS optimization
 result_mle <- nloptr(
@@ -191,4 +192,35 @@ modelsummary(models, output = "PS8_regression.tex")
 tex <- readLines("PS8_regression.tex")
 tex <- sub("\\\\begin\\{table\\}", "\\\\begin{table}[H]", tex)
 writeLines(tex, "PS8_regression.tex")
+
+
+# ============================================================
+# Comparison table: all methods vs true beta
+# ============================================================
+
+# Build comparison data frame
+comparison <- data.frame(
+  True       = beta,
+  ClosedForm = as.vector(beta_hat_OLS),
+  GradDesc   = beta_gd,
+  LBFGS      = result_lbfgs$solution,
+  NelderMead = result_nm$solution,
+  MLE        = result_mle$solution[1:K],
+  lm         = coef(ols_lm)
+)
+
+# Add a beta label column as the first column
+comparison <- cbind(Beta = paste0("beta ", 1:K), comparison)
+
+# Print full precision
+print(comparison, digits = 7)
+
+# Export comparison table to .tex
+library(tinytable)
+tt(comparison, digits = 7) |> save_tt("PS8_comparison.tex", overwrite = TRUE)
+
+# Automatically add [H] to force table placement (only if not already present)
+tex <- readLines("PS8_comparison.tex")
+tex <- sub("\\\\begin\\{table\\}(?!\\[H\\])", "\\\\begin{table}[H]", tex, perl = TRUE)
+writeLines(tex, "PS8_comparison.tex")
 
