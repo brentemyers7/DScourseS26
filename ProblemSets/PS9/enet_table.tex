@@ -1,0 +1,14 @@
+\begin{table}[H]
+\centering
+\caption{Cross-Validation Results: All Three Models (Including Elastic Net)}
+\label{tab:enet_results}
+\begin{tabular}{lccc}
+\hline\hline
+Model & Optimal $\lambda$ & In-Sample RMSE & Out-of-Sample RMSE \\
+\hline
+LASSO ($\alpha = 1$)        & 0.002646 & 0.1394 & 0.1831 \\
+Elastic Net ($\alpha = 0.5$) & 0.005807 & 0.1402 & 0.1803 \\
+Ridge ($\alpha = 0$)        & 0.03664  & 0.1404 & 0.1820 \\
+\hline\hline
+\end{tabular}
+\end{table}
