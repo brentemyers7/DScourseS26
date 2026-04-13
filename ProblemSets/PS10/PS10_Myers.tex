@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\setlength{\headheight}{41.55003pt}
+\addtolength{\topmargin}{-29.55003pt}
+\usepackage[us,nodayofweek]{datetime}
+\usepackage{booktabs}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\rhead{Brent Myers \\ Econ 5253 \\ \today}
+
+\begin{document}
+
+\begin{center}
+\textbf{\underline{Problem Set 10}}\\
+\textit{{Using cross-validation to tune classification models using four of the Five Tribes of Machine Learning: trees, neural networks, naive Bayes, and k-nearest neighbor / support vector machines.}}
+\end{center}
+
+\section*{Classification Model Comparison}
+
+Using the UCI Adult Income dataset, I trained and tuned five classification algorithms to predict whether an individual earns more than \$50K per year. Each model was tuned via 3-fold cross-validation on an 80/20 train-test split. The target variable is \texttt{high.earner}, and the features include education, marital status, race, workclass, occupation, relationship, sex, age, capital gain, capital loss, and hours worked per week.
+
+\section*{Optimal Tuning Parameters}
+
+Table~\ref{tab:results} reports the optimal tuning parameter values selected by cross-validation and the out-of-sample (test set) accuracy for each algorithm.
+
+\begin{table}[h]
+\centering
+\caption{Optimal Tuning Parameters and Out-of-Sample Accuracy}
+\label{tab:results}
+\small
+\begin{tabular}{llc}
+\toprule
+Algorithm & Optimal Tuning Parameters & Test Accuracy \\
+\midrule
+Logistic Reg. & penalty $= 0.0000000001$ & 0.853 \\
+Decision Tree & cost\_comp. $= 0.001$, depth $= 15$, min\_n $= 10$ & 0.868 \\
+Neural Network & hidden\_units $= 7$, penalty $= 1.0$ & 0.844 \\
+kNN & neighbors $= 30$ & 0.843 \\
+SVM & cost $= 1.0$, rbf\_sigma $= 0.25$ & 0.864 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{-1em}
+\section*{Discussion}
+
+The decision tree achieved the highest out-of-sample accuracy at 0.868, followed closely by the SVM at 0.864. Logistic regression performed well at 0.853, while the neural network and kNN were the weakest performers at 0.844 and 0.843, respectively.
+
+All five models performed within a relatively narrow range (about 2.5 percentage points), suggesting that for this dataset the choice of algorithm matters less than having appropriate features. The decision tree's strong performance likely reflects its ability to capture nonlinear relationships and interactions between variables without explicit feature engineering. The SVM also performed well, which is consistent with its strength in finding complex decision boundaries via the kernel trick.
+
+The neural network's relatively modest performance may be due to the single hidden layer architecture and the limited tuning grid. The kNN algorithm's lower accuracy is expected given that it struggles with high-dimensional data containing a mix of categorical and continuous features, and distance-based methods are sensitive to feature scaling, which was not applied here.
+
+\end{document}
