@@ -1,0 +1,45 @@
+\begin{table}[H]
+\centering
+\caption{OLS Regression with Industry Fixed Effects (Robust Standard Errors)}
+\label{tab:industry_fe}
+\begin{tblr}[         %% tabularray outer open
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={Heteroskedasticity-consistent (HC0) standard errors in parentheses.},
+note{  }={Industry dummies based on 2-digit SIC codes (industries with <10 obs collapsed into Other).},
+note{   }={Industry coefficients suppressed for brevity; jointly significant (p < 0.001).},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]},
+hline{2}={1-2}{solid, black, 0.05em},
+hline{22}={1-2}{solid, black, 0.05em},
+hline{1}={1-2}{solid, black, 0.08em},
+hline{25}={1-2}{solid, black, 0.08em},
+column{2}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Model 4 \\
+Intercept & \num{0.310}*** \\
+& (\num{0.062}) \\
+tax\_diff & \num{-0.183}*** \\
+& (\num{0.014}) \\
+ww\_profit & \num{-0.748}*** \\
+& (\num{0.076}) \\
+size & \num{0.008}*** \\
+& (\num{0.003}) \\
+leverage & \num{0.069}*** \\
+& (\num{0.015}) \\
+rnd\_intensity & \num{-0.147} \\
+& (\num{0.118}) \\
+ad\_intensity & \num{0.213}** \\
+& (\num{0.105}) \\
+ppe\_intensity & \num{0.035} \\
+& (\num{0.027}) \\
+year\_trend & \num{0.003} \\
+& (\num{0.002}) \\
+post\_tcja & \num{0.020} \\
+& (\num{0.016}) \\
+N & \num{1536} \\
+R-squared & \num{0.3543} \\
+Adj. R-squared & \num{0.3362} \\
+\end{tblr}
+\end{table}

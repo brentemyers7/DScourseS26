@@ -1,0 +1,44 @@
+\begin{table}[H]
+\centering
+\caption{Sensitivity Analysis --- Excluding Ambiguous Domestic Segments}
+\label{tab:sensitivity}
+\begin{tblr}[         %% tabularray outer open
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={Heteroskedasticity-consistent (HC0) standard errors in parentheses.},
+note{  }={Excl. Ambiguous drops segments labeled North America, Americas, The Americas, and Corporate before classifying.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]},
+hline{2}={1-3}{solid, black, 0.05em},
+hline{22}={1-3}{solid, black, 0.05em},
+hline{1}={1-3}{solid, black, 0.08em},
+hline{25}={1-3}{solid, black, 0.08em},
+column{2-3}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& Main Sample & Excl. Ambiguous \\
+Intercept & \num{-0.026} & \num{-0.034} \\
+& (\num{0.021}) & (\num{0.029}) \\
+tax\_diff & \num{-0.162}*** & \num{-0.152}*** \\
+& (\num{0.013}) & (\num{0.017}) \\
+ww\_profit & \num{-0.469}*** & \num{-0.456}*** \\
+& (\num{0.091}) & (\num{0.116}) \\
+size & \num{0.005}** & \num{0.006} \\
+& (\num{0.003}) & (\num{0.004}) \\
+leverage & \num{0.086}*** & \num{0.058}*** \\
+& (\num{0.018}) & (\num{0.020}) \\
+rnd\_intensity & \num{-0.092} & \num{-0.064} \\
+& (\num{0.101}) & (\num{0.142}) \\
+ad\_intensity & \num{0.231}** & \num{0.090} \\
+& (\num{0.092}) & (\num{0.153}) \\
+ppe\_intensity & \num{0.047} & \num{0.063} \\
+& (\num{0.035}) & (\num{0.041}) \\
+year\_trend & \num{0.002} & \num{0.001} \\
+& (\num{0.002}) & (\num{0.003}) \\
+post\_tcja & \num{0.017} & \num{0.024} \\
+& (\num{0.018}) & (\num{0.024}) \\
+N & \num{1536} & \num{982} \\
+R-squared & \num{0.1213} & \num{0.0967} \\
+Adj. R-squared & \num{0.1161} & \num{0.0884} \\
+\end{tblr}
+\end{table}
