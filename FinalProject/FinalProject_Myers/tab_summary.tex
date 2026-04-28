@@ -1,0 +1,28 @@
+\begin{table}[H]
+\centering
+\caption{Summary Statistics for All Regression Variables}
+\label{tab:summary}
+\begin{tblr}[         %% tabularray outer open
+note{}={Source: Compustat via WRDS. Sample period: 2010--2024, excluding 2017.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-7}{solid, black, 0.05em},
+hline{1}={1-7}{solid, black, 0.08em},
+hline{12}={1-7}{solid, black, 0.08em},
+column{1}={}{halign=l},
+column{2-7}={}{halign=r},
+}                     %% tabularray inner close
+& N & Mean & Median & SD & Min & Max \\
+income\_shift & 1553 & \num{0.0065} & \num{0.0097} & \num{0.1802} & \num{-1.0000} & \num{1.0000} \\
+tax\_diff & 1536 & \num{0.0355} & \num{-0.0222} & \num{0.2512} & \num{-0.3474} & \num{1.0000} \\
+ww\_profit & 1553 & \num{0.1175} & \num{0.0970} & \num{0.0929} & \num{6.851e-04} & \num{1.0000} \\
+size & 1553 & \num{7.8999} & \num{7.9067} & \num{1.9758} & \num{2.8613} & \num{14.6979} \\
+leverage & 1553 & \num{0.2645} & \num{0.2212} & \num{0.2492} & \num{0.0000} & \num{2.4387} \\
+rnd\_intensity & 1553 & \num{0.0209} & \num{0.0000} & \num{0.0437} & \num{0.0000} & \num{0.7584} \\
+ad\_intensity & 1553 & \num{0.0137} & \num{0.0000} & \num{0.0356} & \num{0.0000} & \num{0.2821} \\
+ppe\_intensity & 1553 & \num{0.2097} & \num{0.1453} & \num{0.1978} & \num{0.0013} & \num{0.8920} \\
+year\_trend & 1553 & \num{5.7527} & \num{5.0000} & \num{4.3653} & \num{0.0000} & \num{14.0000} \\
+post\_tcja & 1553 & \num{0.3670} & \num{0.0000} & \num{0.4822} & \num{0.0000} & \num{1.0000} \\
+\end{tblr}
+\end{table}

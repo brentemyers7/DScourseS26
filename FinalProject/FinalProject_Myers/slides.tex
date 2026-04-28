@@ -1,0 +1,104 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\definecolor{oucrimson}{RGB}{132,22,23}
+\usecolortheme[named=oucrimson]{structure}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\title[Income Shifting by MNEs]{What Drives Income Shifting by Multinational Enterprises?}
+\author{Brent Myers}
+\institute[University of Oklahoma]{University of Oklahoma \\ Econ 5253: Data Science for Economists}
+\date{April 30, 2026}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}
+\titlepage
+\end{frame}
+
+% Slide 1: Introduction
+\begin{frame}{Introduction}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+    \item Multinational enterprises (MNEs) can shift profits between domestic and foreign jurisdictions to minimize taxes
+    \item The Tax Cuts and Jobs Act (TCJA) of 2017 reduced the U.S. corporate rate from 35\% to 21\%
+    \item \textbf{Research question:} What firm-level characteristics drive income shifting, and did the TCJA reduce the incentive to shift?
+\end{itemize}
+\end{column}
+\begin{column}{0.50\textwidth}
+\includegraphics[width=\textwidth]{fig2_tax_diff_vs_shift.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 2: Data
+\begin{frame}{Data}
+\begin{itemize}
+    \item \textbf{Source:} WRDS Compustat (Fundamentals Annual + Geographic Segments)
+    \item Sample: 1,553 firm-year observations from 346 U.S. MNEs (2010--2024, excluding 2017)
+    \item \textbf{Dependent variable:} Income shifting = foreign profit margin $-$ domestic profit margin
+    \item \textbf{Key independent variables:}
+    \begin{itemize}
+        \item Tax differential (foreign $-$ domestic effective rate)
+        \item Worldwide profitability
+        \item Firm size, leverage, R\&D intensity, advertising intensity, PPE intensity
+        \item Post-TCJA indicator and year trend
+    \end{itemize}
+    \item Fiscal year 2017 excluded due to TCJA transition effects
+\end{itemize}
+\end{frame}
+
+% Slide 3: Methods
+\begin{frame}{Methods}
+\begin{itemize}
+    \item OLS regression with robust (HC0) standard errors:
+\end{itemize}
+\begin{equation*}
+\text{income\_shift}_{it} = \beta_0 + \beta_1 \text{tax\_diff}_{it} + \beta_2 \text{ww\_profit}_{it} + \boldsymbol{\beta} \mathbf{X}_{it} + \varepsilon_{it}
+\end{equation*}
+\begin{itemize}
+    \item Progressive specifications:
+    \begin{itemize}
+        \item Model 1: Baseline with all controls
+        \item Model 2: Year fixed effects
+        \item Model 3: TCJA interaction terms
+        \item Model 4: Industry (2-digit SIC) fixed effects
+    \end{itemize}
+    \item Sensitivity analysis excluding ambiguous geographic segments (995 obs)
+\end{itemize}
+\end{frame}
+
+% Slide 4: Findings
+\begin{frame}{Findings}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+    \item Tax differential: $\hat{\beta} = -0.162$ ($p < .0001$) — higher foreign tax rates reduce outward shifting
+    \item Worldwide profit: $\hat{\beta} = -0.469$ ($p < .0001$)
+    \item Leverage: $\hat{\beta} = 0.086$ ($p < .0001$)
+    \item Ad intensity: $\hat{\beta} = 0.231$ ($p = .012$)
+    \item Firm size: $\hat{\beta} = 0.005$ ($p = .049$)
+    \item Adjusted $R^2 = 11.61\%$
+\end{itemize}
+\end{column}
+\begin{column}{0.50\textwidth}
+\includegraphics[width=\textwidth]{fig1_income_shift_over_time.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 5: Takeaway
+\begin{frame}{What Did We Learn?}
+\begin{itemize}
+    \item Tax differentials are the strongest driver of income shifting — a 1 pp increase in the foreign-domestic tax gap reduces shifting by 0.16 pp
+    \item Larger, more leveraged firms with higher advertising intensity shift more income abroad
+    \item Post-TCJA coefficient is positive but insignificant — no clear evidence the reform reduced shifting
+    \item \textbf{Policy implication:} Statutory rate cuts alone may not curb profit shifting; enforcement and base-broadening measures may also be needed
+    \item \textbf{Limitations:} Compustat geographic segments may not capture all shifting channels; excludes financial firms
+\end{itemize}
+\end{frame}
+
+\end{document}
