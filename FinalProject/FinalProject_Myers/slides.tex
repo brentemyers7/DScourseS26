@@ -23,54 +23,9 @@
 \end{frame}
 
 % ============================================================
-% INTRO SLIDE 1: What is Income Shifting?
+% INTRO SLIDE 1: Income Shifting - Example 1
 % ============================================================
 \begin{frame}{Introduction}
-\centerline{\large\textbf{What is Income Shifting?}}
-\vspace{0.3cm}
-\centering
-\begin{tikzpicture}[
-  scale=0.85,
-  entity/.style={draw, thick, rounded corners=4pt, minimum width=3.2cm, minimum height=1.6cm, align=center, font=\small},
-  arrow/.style={-{Stealth[length=3.5mm]}, thick}
-]
-  % Parent box
-  \node[entity, fill=oucrimson!12, draw=oucrimson!70!black] (parent) at (-4, 0) {\textbf{Parent}\\\small(U.S.)};
-
-  % Subsidiary box
-  \node[entity, fill=green!10, draw=green!50!black] (sub) at (4, 0) {\textbf{Subsidiary}\\\small(Foreign)};
-
-  % Profit shifting arrow (large, curved, on top)
-  \draw[arrow, oucrimson, line width=2pt] 
-    (parent.north) .. controls (-1.5, 2.5) and (1.5, 2.5) .. (sub.north)
-    node[midway, above=0.1cm, font=\small\bfseries] {Shift Profits};
-
-  % Dollar signs along the arrow
-  \node[font=\small, color=oucrimson!80!black] at (-1.5, 1.8) {\$};
-  \node[font=\small, color=oucrimson!80!black] at (0, 2.1) {\$\$};
-  \node[font=\small, color=oucrimson!80!black] at (1.5, 1.8) {\$};
-
-  % Tax labels below boxes
-  \node[font=\scriptsize, color=red!70!black] at (-4, -1.6) {High Tax Rate};
-  \node[font=\scriptsize, color=green!50!black] at (4, -1.6) {Low Tax Rate};
-
-  % Goods/services arrow (bottom, going right)
-  \draw[arrow, blue!60!black, dashed] 
-    (parent.south) .. controls (-1.5, -2.5) and (1.5, -2.5) .. (sub.south)
-    node[midway, below=0.1cm, font=\small] {Goods \& Services};
-
-  % Result annotation
-  \node[draw=gray, rounded corners, fill=gray!8, font=\small, text width=7.5cm, align=center] at (0, -4.2) {
-    By adjusting \textbf{transfer prices} on intercompany transactions,\\
-    MNEs can shift taxable income to lower-tax jurisdictions.
-  };
-\end{tikzpicture}
-\end{frame}
-
-% ============================================================
-% INTRO SLIDE 2: Income Shifting - Example 1
-% ============================================================
-\begin{frame}{Introduction -- continued}
 \centerline{\large\textbf{Income Shifting -- Example 1}}
 \vspace{0.1cm}
 \centering
@@ -101,8 +56,8 @@
   \draw[arrow, blue!70!black] (hq.east) -- node[above, font=\scriptsize] {Product = \$40} (sub.west);
   \draw[arrow, green!50!black] (sub.south) -- ++(0,-0.6) node[font=\scriptsize, below] {Sell = \$100};
 
-  % Customer icon at bottom right
-  \node[font=\Large] at (4.5, -1.8) {\textbf{\textsf{Customer}}};
+  % Customer label (unbolded, moved closer to Sell)
+  \node[font=\normalsize] at (4.5, -0.8) {\textsf{Customer}};
 \end{tikzpicture}
 
 \vspace{0.2cm}
@@ -110,7 +65,7 @@
 \end{frame}
 
 % ============================================================
-% INTRO SLIDE 3: Income Shifting - Example 2
+% INTRO SLIDE 2: Income Shifting - Example 2
 % ============================================================
 \begin{frame}{Introduction -- continued}
 \centerline{\large\textbf{Income Shifting -- Example 2}}
@@ -143,12 +98,52 @@
   \draw[arrow, blue!70!black] (hq.east) -- node[above, font=\scriptsize] {Product = \$80} (sub.west);
   \draw[arrow, green!50!black] (sub.south) -- ++(0,-0.6) node[font=\scriptsize, below] {Sell = \$100};
 
-  % Customer icon at bottom right
-  \node[font=\Large] at (4.5, -1.8) {\textbf{\textsf{Customer}}};
+  % Customer label (unbolded, moved closer to Sell)
+  \node[font=\normalsize] at (4.5, -0.8) {\textsf{Customer}};
 \end{tikzpicture}
 
 \vspace{0.2cm}
 {\small \textit{HQ raises the transfer price to \$80, keeping \$60 of profit in the low-tax jurisdiction.}}
+\end{frame}
+
+% ============================================================
+% INTRO SLIDE 3: What is Income Shifting? (moved from old slide 2)
+% ============================================================
+\begin{frame}{Introduction -- continued}
+\centerline{\large\textbf{What is Income Shifting?}}
+\vspace{0.3cm}
+\centering
+\begin{tikzpicture}[
+  scale=0.85,
+  entity/.style={draw, thick, rounded corners=4pt, minimum width=3.2cm, minimum height=1.6cm, align=center, font=\small},
+  arrow/.style={-{Stealth[length=3.5mm]}, thick}
+]
+  % Parent box (no U.S. label)
+  \node[entity, fill=oucrimson!12, draw=oucrimson!70!black] (parent) at (-4, 0) {\textbf{Parent}};
+
+  % Subsidiary box (no Foreign label)
+  \node[entity, fill=green!10, draw=green!50!black] (sub) at (4, 0) {\textbf{Subsidiary}};
+
+  % Profit shifting arrow (bidirectional, curved, on top, no $ signs)
+  \draw[{Stealth[length=3.5mm]}-{Stealth[length=3.5mm]}, oucrimson, line width=2pt] 
+    (parent.north) .. controls (-1.5, 2.5) and (1.5, 2.5) .. (sub.north)
+    node[midway, above=0.1cm, font=\small\bfseries] {Shift Profits};
+
+  % Tax labels below boxes
+  \node[font=\scriptsize, color=red!70!black] at (-4, -1.6) {High Tax Rate};
+  \node[font=\scriptsize, color=green!50!black] at (4, -1.6) {Low Tax Rate};
+
+  % Goods/services arrow (bidirectional, bottom)
+  \draw[{Stealth[length=3.5mm]}-{Stealth[length=3.5mm]}, blue!60!black, dashed] 
+    (parent.south) .. controls (-1.5, -2.5) and (1.5, -2.5) .. (sub.south)
+    node[midway, below=0.1cm, font=\small] {Goods \& Services};
+
+  % Result annotation
+  \node[draw=gray, rounded corners, fill=gray!8, font=\small, text width=7.5cm, align=center] at (0, -4.2) {
+    By adjusting \textbf{transfer prices} on intercompany transactions,\\
+    MNEs can shift taxable income to lower-tax jurisdictions.
+  };
+\end{tikzpicture}
 \end{frame}
 
 % ============================================================
@@ -187,40 +182,46 @@ Contributing appropriate tax amounts to fund government services and infrastruct
 This study extends prior work by:
 \begin{itemize}
     \item Covering fiscal years \textbf{2010--2024} (excluding 2017)
-    \item Including pre- and post-TCJA periods
+    \begin{itemize}
+        \item Including pre- and post-TCJA periods
+    \end{itemize}
 \end{itemize}
 \end{frame}
 
 % ============================================================
-% SLIDE 6: Data
+% SLIDE 6: Data (variable definitions table replaces descriptive stats)
 % ============================================================
 \begin{frame}{Data}
 \begin{itemize}
     \item \textbf{Source:} WRDS Compustat (Fundamentals Annual + Geographic Segments)
+    \begin{itemize}
+        \item Publicly traded U.S.\ multinational companies
+    \end{itemize}
     \item \textbf{Sample:} 1,553 firm-year observations from 346 U.S.\ MNEs (2010--2024, excluding 2017)
-    \item \textbf{Dependent variable:} Income shifting = foreign profit margin $-$ domestic profit margin
 \end{itemize}
 
-\vspace{0.2cm}
+\vspace{0.1cm}
 {\footnotesize
 \begin{center}
-\textbf{Descriptive Statistics}
+\textbf{Variable Definitions}
 \end{center}
-\vspace{-0.2cm}
+\vspace{-0.3cm}
 \begin{table}
 \centering
-\begin{tabular}{lrrrrr}
+\begin{tabular}{ll}
 \toprule
-\textbf{Variable} & \textbf{N} & \textbf{Mean} & \textbf{Median} & \textbf{Std Dev} \\
+\textbf{Variable} & \textbf{Definition} \\
 \midrule
-income\_shift & 1,553 & 0.0065 & 0.0097 & 0.1802 \\
-tax\_diff     & 1,553 & 0.0355 & $-$0.0222 & 0.2512 \\
-ww\_profit    & 1,553 & 0.1175 & 0.0970 & 0.0929 \\
-size          & 1,553 & 8.2410 & 8.1890 & 1.8920 \\
-leverage      & 1,553 & 0.2870 & 0.2520 & 0.2210 \\
-rnd\_intensity & 1,553 & 0.0310 & 0.0060 & 0.0590 \\
-ad\_intensity  & 1,553 & 0.0120 & 0.0000 & 0.0330 \\
-ppe\_intensity & 1,553 & 0.2100 & 0.1380 & 0.2040 \\
+income\_shift & Foreign profit margin $-$ domestic profit margin \\
+tax\_diff & Foreign effective tax rate $-$ U.S.\ statutory rate \\
+ww\_profit & Worldwide pre-tax income / total revenue \\
+size & Natural log of total assets \\
+leverage & Total debt / total assets \\
+rnd\_intensity & R\&D expense / total revenue \\
+ad\_intensity & Advertising expense / total revenue \\
+ppe\_intensity & Net PP\&E / total assets \\
+year\_trend & Fiscal year $-$ 2010 \\
+post\_tcja & $= 1$ if fiscal year $\geq$ 2018, $= 0$ otherwise \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -244,28 +245,26 @@ ppe\_intensity & 1,553 & 0.2100 & 0.1380 & 0.2040 \\
 \end{frame}
 
 % ============================================================
-% SLIDE 6d: Data - continued (Variable Definitions)
+% SLIDE 6d: Data - continued (Descriptive Statistics - moved here)
 % ============================================================
 \begin{frame}{Data -- continued}
-\centerline{\large\textbf{Variable Definitions}}
+\centerline{\large\textbf{Descriptive Statistics}}
 \vspace{0.2cm}
-{\small
+{\footnotesize
 \begin{table}
 \centering
-\begin{tabular}{ll}
+\begin{tabular}{lrrrrr}
 \toprule
-\textbf{Variable} & \textbf{Definition} \\
+\textbf{Variable} & \textbf{N} & \textbf{Mean} & \textbf{Median} & \textbf{Std Dev} \\
 \midrule
-income\_shift & Foreign profit margin $-$ domestic profit margin \\
-tax\_diff & Foreign effective tax rate $-$ U.S.\ statutory rate \\
-ww\_profit & Worldwide pre-tax income / total revenue \\
-size & Natural log of total assets \\
-leverage & Total debt / total assets \\
-rnd\_intensity & R\&D expense / total revenue \\
-ad\_intensity & Advertising expense / total revenue \\
-ppe\_intensity & Net PP\&E / total assets \\
-year\_trend & Fiscal year $-$ 2010 \\
-post\_tcja & $= 1$ if fiscal year $\geq$ 2018, $= 0$ otherwise \\
+income\_shift & 1,553 & 0.0065 & 0.0097 & 0.1802 \\
+tax\_diff     & 1,553 & 0.0355 & $-$0.0222 & 0.2512 \\
+ww\_profit    & 1,553 & 0.1175 & 0.0970 & 0.0929 \\
+size          & 1,553 & 8.2410 & 8.1890 & 1.8920 \\
+leverage      & 1,553 & 0.2870 & 0.2520 & 0.2210 \\
+rnd\_intensity & 1,553 & 0.0310 & 0.0060 & 0.0590 \\
+ad\_intensity  & 1,553 & 0.0120 & 0.0000 & 0.0330 \\
+ppe\_intensity & 1,553 & 0.2100 & 0.1380 & 0.2040 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -362,12 +361,12 @@ Larger firms engage in marginally more shifting, consistent with having the reso
 \begin{itemize}
     \item Tax differentials are the \textbf{strongest driver} of income shifting --- a 1 pp increase in the foreign-domestic tax gap reduces outward shifting by 0.16 pp
     \item Results are robust across year fixed effects, TCJA interactions, industry fixed effects, and a restricted sensitivity sample
-    \item Post-TCJA coefficient is positive but insignificant --- \textbf{no clear evidence the reform reduced shifting}
+    \item Post-TCJA coefficient is insignificant --- \textbf{no clear evidence the reform reduced shifting}
 \end{itemize}
 
 \vspace{0.3cm}
 \begin{block}{Policy Implication}
-Statutory rate cuts alone may not curb profit shifting. Enforcement and base-broadening measures may also be needed.
+Statutory rate cuts alone may not curb profit shifting. Other tax rules or incentives should be considered including different enforcement.
 \end{block}
 
 \vspace{0.2cm}
